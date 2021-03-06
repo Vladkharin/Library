@@ -11,3 +11,16 @@ $.prototype.html = function(content) {
 
     return this;
 };  
+
+$.prototype.eq = function(i) {
+    const swap = this[i];
+    const objLenght = Object.keys(this).length;
+
+    for (let i = 0; i < objLenght; i++) {
+        delete this[i];
+    }
+
+    return this;
+};  
+
+
