@@ -20,7 +20,102 @@ $.prototype.eq = function(i) {
         delete this[i];
     }
 
+    this[0] = swap
+    this.length = 1;
     return this;
 };  
 
+$.prototype.index = function() {
 
+    const parent = this[0].parentNode;
+    const childs = [...parent.children];
+
+    const findMyUndex = (item) => {
+        return item == this[0];
+    };
+
+    return childs.findIndex(findMyUndex);
+
+};
+
+$.prototype.find = function(selector) {
+    let numberOfItems = 0;
+    let counter = 0;
+
+    const copyObj = Object.assign({}, this);
+
+    for(let i = 0; i < copyObj.length; i++) {
+        const arr = copyObj[i].querySelectorAll(selector);
+        if(arr.length === 0) {
+            continue;
+        }
+
+        for (let j = 0; j < arr.length; j++) {
+            this[counter] = arr[j];
+            counter++;
+        }
+
+        numberOfItems += arr.length;
+
+    }
+
+    this.length = numberOfItems;
+
+    const objLenght = Object.keys(this).length;
+
+    for (; numberOfItems < objLenght; numberOfItems++) {
+        delete this[numberOfItems];
+    }
+    
+    return this;
+};
+
+$.prototype.closest = function(selector) {
+    let counter = 0;
+
+    for ( let i = 0; i < this.length; i++) {
+        this[i] = this[i].closest(selector);
+        counter++;
+    }
+
+    const objLenght = Object.keys(this).length;
+
+    for (; counter < objLenght; counter++) {
+        delete this[counter];
+    }
+    
+    return this;
+
+};
+
+$.prototype.siblings = function(selector) {
+    let numberOfItems = 0;
+    let counter = 0;
+
+    const copyObj = Object.assign({}, this);
+
+    for(let i = 0; i < copyObj.length; i++) {
+        const arr = copyObj[i].parentNode.children;
+        if(copyObj[i] === arr[i] ) {
+            continue;
+        }
+
+        for (let j = 0; j < arr.length; j++) {
+            this[counter] = arr[j];
+            counter++;
+        }
+
+        numberOfItems += arr.length - 1;
+
+    }
+
+    this.length = numberOfItems;
+
+    const objLenght = Object.keys(this).length;
+
+    for (; numberOfItems < objLenght; numberOfItems++) {
+        delete this[numberOfItems];
+    }
+    
+    return this; 
+};  
