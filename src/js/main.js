@@ -10,7 +10,10 @@ $('div').click(function() {
 });
 
 
-console.log($('div').eq(2).find('.more'));
-console.log($('button').html('hello')); 
-console.log($('.some').closest('.findme'));
-console.log($('.more').eq(0).siblings());
+// console.log($('div').eq(2).find('.more'));
+// console.log($('button').html('hello')); 
+// console.log($('.some').closest('.findme'));
+// console.log($('.more').eq(0).sibling;
+$('button').fadeIn(1800);
+
+
